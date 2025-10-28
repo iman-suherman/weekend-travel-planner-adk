@@ -8,7 +8,7 @@ try:
 except ImportError:
     pass
 
-MODEL = "gemini-2.0-flash"
+MODEL = "gemini-2.0-flash-001"
 
 idea_agent = LlmAgent(
     model=MODEL,
@@ -30,7 +30,7 @@ refiner_agent = LlmAgent(
 
 root_agent = LlmAgent(
     model=MODEL,
-    name="PlannerAgent",
+    name="TravelAgent",
     instruction="""You are a Trip Planner, coordinating specialist agents.
 Your goal is to provide budget-friendly weekend trip ideas. For each user request, follow the below instructions:
 1. First, use "(idea_agent)" to brainstorm ideas based on the user's request.

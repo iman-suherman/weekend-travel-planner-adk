@@ -8,7 +8,7 @@ The system consists of three agents:
 
 1. **IdeaAgent** - Brainstorms creative and exciting weekend travel ideas based on user preferences
 2. **RefinerAgent** - Filters travel ideas to ensure they fit within the specified budget
-3. **PlannerAgent** - Coordinates the workflow between the other two agents
+3. **TravelAgent** - Coordinates the workflow between the other two agents
 
 ## Setup
 
@@ -43,17 +43,25 @@ export GOOGLE_API_KEY=your_api_key_here
 
 ## Project Structure
 
-ADK expects a specific directory structure when running `adk web agents`:
+ADK expects a specific directory structure when running `adk web travel_agent`:
 
 ```text
 .
-├── agents/
-│   └── agents/
+├── travel_agent/
+│   └── travel_agent/
 │       └── agent.py           # Main agent configuration (with root_agent)
 └── requirements.txt
 ```
 
-Note: When you run `adk web agents`, ADK looks for `agents/agents/agent.py`.
+**Why are there nested folders with the same name?**
+
+The nested `travel_agent/travel_agent/` structure follows ADK's module naming convention:
+- The outer directory is the **package name** (`travel_agent`)
+- The inner directory is the **Python module name** (`travel_agent`)
+- When you run `adk web travel_agent`, ADK imports it as `travel_agent.travel_agent.agent`
+- This allows the module to be imported as `travel_agent.travel_agent.agent` in Python
+
+When you run `adk web travel_agent`, ADK looks for `travel_agent/travel_agent/agent.py` - the app name matches both the outer directory and the inner module directory.
 
 ## Running the Agent
 
@@ -62,7 +70,7 @@ Note: When you run `adk web agents`, ADK looks for `agents/agents/agent.py`.
 To start the web interface, run from the project root:
 
 ```bash
-adk web agents
+adk web travel_agent
 ```
 
 This will start a web server where you can interact with your agents.
@@ -72,18 +80,18 @@ This will start a web server where you can interact with your agents.
 To start the API server:
 
 ```bash
-adk api_server agents
+adk api_server travel_agent
 ```
 
 ### Using the Web Interface
 
-Once `adk web agents` is running, you can:
+Once `adk web travel_agent` is running, you can:
 
 1. Open your browser and navigate to the provided URL
-2. Select the agent you want to use (PlannerAgent, IdeaAgent, or RefinerAgent)
+2. Select the agent you want to use (TravelAgent, IdeaAgent, or RefinerAgent)
 3. Start chatting with the agent to plan your weekend trips
 
-The `root_agent` (PlannerAgent) coordinates the workflow:
+The `root_agent` (TravelAgent) coordinates the workflow:
 
 1. Calls `idea_agent` to generate travel ideas based on your request
 2. Passes those ideas to `refiner_agent` to filter them by budget
